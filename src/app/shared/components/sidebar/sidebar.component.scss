@@ -1,0 +1,128 @@
+
+:host {
+  .sidebar {
+    position: fixed;
+    width: 260px;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 120;
+    transform: translateZ(0);
+    transition: left 0.3s ease;
+    padding: 7px;
+    box-shadow: #5127a4;
+
+    .sidebar-brand {
+      display: block;
+
+      img.sidebar-brand-logo {
+        width: 160px;
+        margin: 40px auto 48px auto;
+      }
+    }
+
+    .nav {
+      margin-top: 106px;
+    }
+
+    ul.nav li {
+      white-space: nowrap;
+
+      & + li {
+        margin-top: 10px;
+      }
+
+      .subMenus {
+        display: flex;
+        align-items: center;
+
+        padding-left: 12px;
+        border-radius: 0 0 8px 8px;
+        min-height: 80px;
+        max-height: 100%;
+
+        &__title {
+          width: 200px;
+          white-space: normal;
+          word-break: break-word;
+        }
+
+        a:focus-visible {
+          outline: none;
+          .nav-item {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+
+    .nav-item {
+      margin-left: 5px;
+    }
+
+    .nav-button,
+    .nav-item {
+      white-space: normal;
+      word-break: break-word;
+      text-align: left;
+
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+
+      height: 48px;
+
+      position: relative;
+      width: 100%;
+
+      color: #fff;
+      font-size: 12px;
+      font-weight: regular;
+
+      outline: none;
+
+      .bg-item {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+
+        &--show {
+          border-radius: 8px 8px 0 0;
+        }
+
+        &--hide {
+          border-radius: 8px;
+        }
+      }
+
+      &.active {
+        .bg-item {
+          background-color: #e5e7eb29;
+        }
+      }
+
+      &:hover,
+      &:focus-visible {
+        font-weight: bold;
+
+        .bg-item {
+          background-color: #e5e7eb29;
+        }
+      }
+    }
+
+    .nav-button:hover,
+    .nav-button:focus-visible {
+      .nav-item {
+        font-weight:500;
+      }
+    }
+
+    .active {
+      .nav-item {
+        font-weight:500;
+      }
+    }
+  }
+}

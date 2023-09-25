@@ -36,8 +36,6 @@ describe('AuthService', () => {
     authService.isLoggedIn();
 
     expect(authService['storageProvider'].getItem).toHaveBeenCalledWith("ACCESS_TOKEN");
-    // expect(authService['storageProvider'].getItem).toHaveBeenCalledWith("@ZenEmpresas:user:abc123:organization:1:alerts");
-
   });
 
   it('deve retornar os tokens salvos no storage', () => {
@@ -46,7 +44,5 @@ describe('AuthService', () => {
     authService.logout();
 
     expect(authService['storageProvider'].removeItem).toHaveBeenCalledWith("ACCESS_TOKEN");
-    // expect(authService['storageProvider'].getItem).toHaveBeenCalledWith("@ZenEmpresas:user:abc123:organization:1:alerts");
-
   });
 });

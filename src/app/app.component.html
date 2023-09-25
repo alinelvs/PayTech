@@ -1,3 +1,15 @@
-<div>
+<ng-container *ngIf="!hasRoute('auth'); else showAuth">
+  <div class="sidebar-container">
+    <app-sidebar></app-sidebar>
+
+    <div class="sidebar-content">
+      <div class="content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #showAuth>
   <router-outlet></router-outlet>
-</div>
+</ng-template>

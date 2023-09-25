@@ -1,0 +1,43 @@
+<div class="sidebar bg-gray-900">
+  <a class="sidebar-brand" href="/">
+    <img
+      class="sidebar-brand-logo"
+      src="/assets/images/undraw_credit_card_payments_re_qboh.svg"
+      alt="logo"
+    />
+  </a>
+
+  <ul class="nav">
+    <ng-container *ngFor="let menu of menus">
+      <li>
+        <button class="nav-button" (click)="toggleMenu(menu)">
+          <div
+            class="bg-item"
+            [ngClass]="
+              menu.isActive ? 'bg-item--show bg-gray-800' : 'bg-item--hide'
+            "
+          ></div>
+          <span class="nav-item">
+            {{ menu.title }}
+          </span>
+        </button>
+        <ul
+          class="subMenus bg-gray-600"
+          [style.display]="menu.isActive ? '' : 'none'"
+        >
+          <ng-container *ngFor="let subMenu of menu.subMenus">
+            <li>
+              <a [routerLink]="subMenu.url" routerLinkActive="active">
+                <span class="nav-item">
+                  <span class="subMenus__title">
+                    {{ subMenu.title }}
+                  </span>
+                </span>
+              </a>
+            </li>
+          </ng-container>
+        </ul>
+      </li>
+    </ng-container>
+  </ul>
+</div>
