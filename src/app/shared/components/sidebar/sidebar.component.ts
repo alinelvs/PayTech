@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthService } from '@core/services/auth/auth.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { IPageMenu } from '@core/interfaces/page-menu';
 import { pageMenu } from '@core/constants/page-menu.constant';
@@ -19,7 +18,7 @@ export class SidebarComponent {
 
   selectedMenu: IPageMenu | null = null;
 
-  constructor(public authService: AuthService, public router: Router) {
+  constructor(public router: Router) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.selectMenuByUrl(event.url);
@@ -47,10 +46,6 @@ export class SidebarComponent {
   selectMenuByUrl(url: string): void {
     let selected: IPageMenu | null = null;
     const urlWithoutSlash = url.replace('/', '');
-
-    console.log(urlWithoutSlash);
-
-
     this.menus.forEach((menu) => {
       menu.subMenus?.forEach((subMenu) => {
         if (subMenu.url === urlWithoutSlash) {
