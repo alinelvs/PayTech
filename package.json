@@ -9,7 +9,8 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
-    "test:ci": "jest --runInBand"
+    "test:ci": "jest --runInBand",
+    "api": "json-server --watch db.json"
   },
   "private": true,
   "dependencies": {
