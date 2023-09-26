@@ -6,17 +6,6 @@
     (matSortChange)="announceSortChange($event)"
     class="mat-elevation-z8"
   >
-    <ng-container matColumnDef="id">
-      <th
-        mat-header-cell
-        *matHeaderCellDef
-        mat-sort-header
-        sortActionDescription="Sort by id"
-      >
-        No.
-      </th>
-      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-    </ng-container>
 
     <ng-container matColumnDef="name">
       <th
@@ -27,7 +16,7 @@
       >
         Nome
       </th>
-      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      <td mat-cell *matCellDef="let payment">{{ payment.name }}</td>
     </ng-container>
 
     <ng-container matColumnDef="username">
@@ -39,7 +28,7 @@
       >
         Usuário
       </th>
-      <td mat-cell *matCellDef="let element">{{ element.username }}</td>
+      <td mat-cell *matCellDef="let payment">{{ payment.username }}</td>
     </ng-container>
 
     <ng-container matColumnDef="title">
@@ -51,7 +40,7 @@
       >
         Cargo
       </th>
-      <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+      <td mat-cell *matCellDef="let payment">{{ payment.title }}</td>
     </ng-container>
 
     <ng-container matColumnDef="value">
@@ -63,7 +52,9 @@
       >
         Valor
       </th>
-      <td mat-cell *matCellDef="let element">{{ element.value }}</td>
+      <td mat-cell *matCellDef="let payment">
+        {{ payment.value | currency : "BRL" : "symbol" : "1.2-2" }}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="date">
@@ -75,8 +66,10 @@
       >
         Data
       </th>
-      <td mat-cell *matCellDef="let element">
-        {{ element.date }}
+      <td mat-cell *matCellDef="let payment">
+        {{ payment.date | date : "dd/MM/yyyy" }}
+        |
+        {{ payment.date | date : "HH:mm:ss" }}
       </td>
     </ng-container>
 
@@ -89,14 +82,14 @@
       >
         Status do Pagamento
       </th>
-      <td mat-cell *matCellDef="let element">
+      <td mat-cell *matCellDef="let payment">
         <mat-icon
           [ngClass]="{
-            'text-green-400': element.isPayed,
-            'text-red-500': !element.isPayed
+            'text-green-500': payment.isPayed,
+            'text-red-500': !payment.isPayed
           }"
         >
-          {{ element.isPayed ? "check" : "cancel" }}
+          {{ payment.isPayed ? "check" : "cancel" }}
         </mat-icon>
       </td>
     </ng-container>
@@ -104,7 +97,7 @@
     <ng-container matColumnDef="edit">
       <th mat-header-cell *matHeaderCellDef>Editar</th>
 
-      <td mat-cell *matCellDef="let element">
+      <td mat-cell *matCellDef="let payment">
         <button
           mat-icon-button
           matTooltip="Clique para editar"
@@ -118,7 +111,7 @@
     <ng-container matColumnDef="delete">
       <th mat-header-cell *matHeaderCellDef>Deletar</th>
 
-      <td mat-cell *matCellDef="let element">
+      <td mat-cell *matCellDef="let payment">
         <button
           mat-icon-button
           matTooltip="Clique para deletar"
@@ -136,7 +129,7 @@
   <mat-paginator
     [pageSizeOptions]="[5, 10, 20]"
     showFirstLastButtons
-    aria-label="Select page of periodic elements"
+    aria-label="Select page of periodic payments"
   >
   </mat-paginator>
 </div>

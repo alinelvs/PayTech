@@ -5,8 +5,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { PaymentService } from '@core/services/payment/payments.service';
 import { IPayment } from '@core/interfaces/payment.interface';
-
-
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'paytech-dashboard',
@@ -14,12 +13,21 @@ import { IPayment } from '@core/interfaces/payment.interface';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'name', 'username', 'title', 'value', 'date', 'status', 'edit', 'delete'];
-  dataSource = new MatTableDataSource<IPayment>;
+  displayedColumns: string[] = [
+    'name',
+    'username',
+    'title',
+    'value',
+    'date',
+    'status',
+    'edit',
+    'delete',
+  ];
+  dataSource = new MatTableDataSource<IPayment>();
 
   constructor(
     private _liveAnnouncer: LiveAnnouncer,
-    private paymentService: PaymentService,
+    private paymentService: PaymentService
   ) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -45,7 +53,6 @@ export class DashboardComponent implements AfterViewInit {
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
         }
-
       },
     });
   }
