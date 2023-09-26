@@ -116,6 +116,7 @@
           mat-icon-button
           matTooltip="Clique para deletar"
           class="iconbutton"
+          (click)="onDelete(payment.id)"
         >
           <mat-icon class="text-gray-700">delete</mat-icon>
         </button>

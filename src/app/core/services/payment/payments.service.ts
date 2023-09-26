@@ -12,4 +12,8 @@ export class PaymentService {
   getPayments(): Observable<IPayment[]> {
     return this.apiService.get<IPayment[]>(`/payment`);
   }
+
+  deletePayment(paymentId: number): Observable<{}> {
+    return this.apiService.delete<{}>(`/payment/${paymentId}`);
+  }
 }
