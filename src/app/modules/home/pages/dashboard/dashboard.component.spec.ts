@@ -3,6 +3,17 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { DashboardComponent } from './dashboard.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { PaymentService } from '@core/services/payment/payments.service';
+import { of } from 'rxjs';
+
+const PaymentServiceMocks = {
+  getPayments: () => of(
+    {
+      id: 1,
+      name: "Account Test",
+    }
+  ),
+};
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -11,7 +22,10 @@ describe('DashboardComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [DashboardComponent],
-      providers: [RouterTestingModule],
+      providers: [
+        RouterTestingModule,
+        {provide: PaymentService, useValue:PaymentServiceMocks }
+      ],
       schemas: [NO_ERRORS_SCHEMA],
 
     });

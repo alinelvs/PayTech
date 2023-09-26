@@ -1,4 +1,4 @@
-import { IPageMenu } from "@core/interfaces/page-menu";
+import { IPageMenu } from "@core/interfaces/page-menu.interface";
 import { PagesRoutes } from "./page-routes.constant";
 
 export const pageMenu: IPageMenu[] = [

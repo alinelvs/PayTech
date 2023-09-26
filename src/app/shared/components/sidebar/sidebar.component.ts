@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { IPageMenu } from '@core/interfaces/page-menu';
+import { IPageMenu } from '@core/interfaces/page-menu.interface';
 import { pageMenu } from '@core/constants/page-menu.constant';
 
 @Component({

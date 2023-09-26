@@ -7,7 +7,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { StorageProvider } from '@core/providers/storage/models/storage.model';
 import { StorageProviderMock } from '@core/providers/storage/mock/storage.mock';
-import { IPageMenu } from '@core/interfaces/page-menu';
+import { IPageMenu } from '@core/interfaces/page-menu.interface';
 import { Subject } from 'rxjs';
 
 describe('SidebarComponent', () => {
