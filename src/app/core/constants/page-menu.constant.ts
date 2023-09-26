@@ -12,4 +12,14 @@ export const pageMenu: IPageMenu[] = [
     ],
   },
 
+  {
+    title: 'Sistemas',
+    subMenus: [
+      {
+        title: 'Logout',
+        url: PagesRoutes.LOGIN,
+      },
+    ],
+  },
+
 ];
