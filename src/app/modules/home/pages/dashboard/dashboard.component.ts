@@ -16,6 +16,7 @@ import { Subject, takeUntil } from 'rxjs';
 export class DashboardComponent implements AfterViewInit, OnDestroy {
   public dataSource = new MatTableDataSource<IPayment>();
   public displayedColumns: string[] = [
+    'avatar',
     'name',
     'username',
     'title',
