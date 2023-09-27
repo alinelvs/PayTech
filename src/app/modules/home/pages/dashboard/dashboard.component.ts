@@ -6,6 +6,8 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { PaymentService } from '@core/services/payment/payments.service';
 import { IPayment } from '@core/interfaces/payment.interface';
 import { Subject, takeUntil } from 'rxjs';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ModalAddPaymentComponent } from '@modules/home/components/modal-add-payment/modal-add-payment.component';
 
 @Component({
   templateUrl: './dashboard.component.html',
@@ -29,7 +31,8 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private _liveAnnouncer: LiveAnnouncer,
-    private paymentService: PaymentService
+    private paymentService: PaymentService,
+    private dialog: MatDialog
   ) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -58,6 +61,16 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe({
         next: () => this._getPayments(),
+      });
+  }
+
+  public onAdd() {
+    const dialog = this.dialog.open(ModalAddPaymentComponent);
+    dialog
+      .afterClosed()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe({
+        next: (res) => {}
       });
   }
 

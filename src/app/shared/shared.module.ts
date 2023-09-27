@@ -4,7 +4,7 @@ import { AngularMaterialModule } from './angular-material.module';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { ButtonComponent } from './components/button/button.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +17,9 @@ import { ButtonComponent } from './components/button/button.component';
   exports: [
     AngularMaterialModule,
     SidebarComponent,
-    ButtonComponent
+    ButtonComponent,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }

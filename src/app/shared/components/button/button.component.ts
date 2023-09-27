@@ -7,6 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class ButtonComponent {
   @Input() text: string = '';
+  @Input() type: string = 'button';
 	@Output() buttonClick = new EventEmitter();
 	@Input() isDisabled = false;
 
