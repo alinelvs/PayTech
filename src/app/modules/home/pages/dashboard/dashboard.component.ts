@@ -5,11 +5,9 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { PaymentService } from '@core/services/payment/payments.service';
 import { IPayment } from '@core/interfaces/payment.interface';
-import { DatePipe } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'paytech-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })

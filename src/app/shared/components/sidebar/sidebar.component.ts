@@ -4,7 +4,7 @@ import { IPageMenu } from '@core/interfaces/page-menu.interface';
 import { pageMenu } from '@core/constants/page-menu.constant';
 
 @Component({
-  selector: 'app-sidebar',
+  selector: 'paytech-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
@@ -12,9 +12,6 @@ export class SidebarComponent {
   public menus = pageMenu;
   public currentUrl: string = '';
 
-  public isFreeTrial = false;
-  public hasPlanEssentialOrAdvanced = false;
-  public showWidget = false;
 
   selectedMenu: IPageMenu | null = null;
 

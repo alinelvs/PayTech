@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { AngularMaterialModule } from './angular-material.module';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
+import { ButtonComponent } from './components/button/button.component';
 
 
 
 @NgModule({
-  declarations: [SidebarComponent],
+  declarations: [SidebarComponent, ButtonComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -15,7 +16,8 @@ import { RouterModule } from '@angular/router';
   ],
   exports: [
     AngularMaterialModule,
-    SidebarComponent
+    SidebarComponent,
+    ButtonComponent
   ]
 })
 export class SharedModule { }
