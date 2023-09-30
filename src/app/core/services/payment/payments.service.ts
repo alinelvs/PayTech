@@ -13,6 +13,10 @@ export class PaymentService {
     return this.apiService.get<IPayment[]>(`/payment`);
   }
 
+  createPayment(body: IPayment) {
+    return this.apiService.post(`/payment`, body)
+  }
+
   deletePayment(paymentId: number): Observable<{}> {
     return this.apiService.delete<{}>(`/payment/${paymentId}`);
   }

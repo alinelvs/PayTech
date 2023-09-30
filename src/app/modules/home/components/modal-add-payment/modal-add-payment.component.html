@@ -15,7 +15,7 @@
     #formTemplate="ngForm"
     class="grid grid-cols-12 gap-x-4 gap-y-5 mt-5 mb-5"
   >
-    <div class="col-span-6">
+    <div class="col-span-12">
       <label
         for="name"
         class="text-gray-800 text-sm font-bold leading-tight tracking-normal"
@@ -69,9 +69,15 @@
       </label>
       <input
         id="value"
+        prefix="R$ "
+        mask="separator.2"
+        [thousandSeparator]="'.'"
+        [decimalMarker]="','"
+        formControlName="date"
+        [dropSpecialCharacters]="true"
         formControlName="value"
         class="mt-2 text-gray-600 focus:outline-none focus:border focus:border-green-400 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
-        placeholder="Apenas números"
+        placeholder="R$ 999,99"
       />
     </div>
 
@@ -82,28 +88,27 @@
       >
         Data
       </label>
+
       <input
         id="date"
         formControlName="date"
+        mask="d0/M0/0000"
+        decimalMarker=","
+        [dropSpecialCharacters]="false"
         class="mt-2 text-gray-600 focus:outline-none focus:border focus:border-green-400 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
         placeholder="dd/mm/aaaa"
       />
     </div>
 
-    <div class="col-span-6">
-      <label
-        for="isPayed"
-        class="text-gray-800 text-sm font-bold leading-tight tracking-normal"
-      >
-        Status do pagamento
+    <div class="col-span-6 flex">
+      <label class="relative inline-flex items-center mr-5 cursor-pointer mt-6">
+        <input type="checkbox" formControlName="isPayed" class="sr-only peer" checked>
+        <div class="w-11 h-6 bg-gray-200 rounded-full peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white  after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-400"></div>
+        <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Pago</span>
       </label>
-      <input
-        id="isPayed"
-        formControlName="isPayed"
-        class="mt-2 text-gray-600 focus:outline-none focus:border focus:border-green-400 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
-        placeholder=""
-      />
     </div>
+
+
   </form>
 
   <div class="flex items-center justify-end w-full">

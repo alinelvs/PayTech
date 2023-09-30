@@ -5,14 +5,14 @@ import { DashboardComponent } from './dashboard.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PaymentService } from '@core/services/payment/payments.service';
 import { of } from 'rxjs';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 
 const PaymentServiceMocks = {
-  getPayments: () => of(
-    {
+  getPayments: () =>
+    of({
       id: 1,
-      name: "Account Test",
-    }
-  ),
+      name: 'Account Test',
+    }),
 };
 
 describe('DashboardComponent', () => {
@@ -22,12 +22,12 @@ describe('DashboardComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [DashboardComponent],
+      imports: [RouterTestingModule, MatDialogModule],
       providers: [
-        RouterTestingModule,
-        {provide: PaymentService, useValue:PaymentServiceMocks }
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: PaymentService, useValue: PaymentServiceMocks },
       ],
       schemas: [NO_ERRORS_SCHEMA],
-
     });
     fixture = TestBed.createComponent(DashboardComponent);
     component = fixture.componentInstance;

@@ -23,26 +23,20 @@ describe('AuthService', () => {
 
   it('should call the storage with user data', () => {
     jest.spyOn(authService['storageProvider'], 'setItem').mockImplementation();
-
     authService.signIn('test@test.com');
-
     expect(authService['storageProvider'].setItem).toHaveBeenCalled();
   });
 
 
-  it('deve retornar os tokens salvos no storage', () => {
+  it('should return the saved tokens from storage', () => {
     jest.spyOn(authService['storageProvider'], 'getItem').mockImplementation();
-
     authService.isLoggedIn();
-
     expect(authService['storageProvider'].getItem).toHaveBeenCalledWith("ACCESS_TOKEN");
   });
 
-  it('deve retornar os tokens salvos no storage', () => {
+  it('should remove the saved tokens from storage', () => {
     jest.spyOn(authService['storageProvider'], 'removeItem').mockImplementation();
-
     authService.logout();
-
     expect(authService['storageProvider'].removeItem).toHaveBeenCalledWith("ACCESS_TOKEN");
   });
 });

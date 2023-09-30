@@ -70,7 +70,7 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
       .afterClosed()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe({
-        next: (res) => {}
+        next: () => this._getPayments()
       });
   }
 
