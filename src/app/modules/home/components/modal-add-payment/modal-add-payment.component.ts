@@ -1,17 +1,19 @@
 import { PaymentService } from '@core/services/payment/payments.service';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   FormGroupDirective,
   Validators,
 } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { IPayment } from '@core/interfaces/payment.interface';
 import { Subject, takeUntil } from 'rxjs';
 import CustomValidators from '@shared/utils/custom-validators/custom-validators';
-import { formatDateForDatabase } from '@shared/utils/functions/functions';
+import {
+  formatDateForDatabase,
+  formatToBrazilianDate,
+} from '@shared/utils/functions/functions';
 
 @Component({
   templateUrl: './modal-add-payment.component.html',
@@ -19,17 +21,24 @@ import { formatDateForDatabase } from '@shared/utils/functions/functions';
 })
 export class ModalAddPaymentComponent implements OnInit {
   public form!: FormGroup;
+  public currentEditPayment!: IPayment;
 
   private unsubscribe$: Subject<void> = new Subject<void>();
 
   constructor(
     private formBuilder: FormBuilder,
     private paymentService: PaymentService,
-    public dialogRef: MatDialogRef<ModalAddPaymentComponent>
+    public dialogRef: MatDialogRef<ModalAddPaymentComponent>,
+    @Inject(MAT_DIALOG_DATA)
+    public data: {
+      currentEditPayment: IPayment;
+    }
   ) {}
 
   ngOnInit(): void {
+    this._verifyIsEditPayment();
     this._formBuilder();
+    this._updateEditForm();
   }
 
   ngOnDestroy(): void {
@@ -43,7 +52,10 @@ export class ModalAddPaymentComponent implements OnInit {
 
   public onSubmit(form: FormGroupDirective) {
     if (form.valid) {
-      this._addPayment(form.value);
+      const payment = form.value;
+      this.currentEditPayment
+        ? this._editPayment(payment)
+        : this._addPayment(payment);
     }
   }
 
@@ -61,8 +73,23 @@ export class ModalAddPaymentComponent implements OnInit {
       });
   }
 
+  private _editPayment(data: IPayment) {
+    data.date = formatDateForDatabase(data.date);
+    this.paymentService
+      .editPayment(data)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe({
+        complete: () => {
+          this.form.reset();
+          this.onClose();
+        },
+      });
+  }
+
   private _formBuilder() {
     this.form = this.formBuilder.group({
+      id: [null],
+      image: [null],
       name: [null, [Validators.required]],
       username: [null, [Validators.required]],
       title: [null, [Validators.required]],
@@ -70,5 +97,24 @@ export class ModalAddPaymentComponent implements OnInit {
       date: [null, [Validators.required, CustomValidators.date]],
       isPayed: [false, [Validators.required]],
     });
+  }
+
+  private _updateEditForm() {
+    if (this.currentEditPayment) {
+      this.form.patchValue(this.currentEditPayment);
+
+      const { date } = this.currentEditPayment;
+      const formattedDate = formatToBrazilianDate(date);
+
+      if (formattedDate) {
+        this.form.get('date')?.setValue(formattedDate);
+      }
+    }
+  }
+
+  private _verifyIsEditPayment() {
+    if (this.data && this.data.currentEditPayment) {
+      this.currentEditPayment = this.data.currentEditPayment;
+    }
   }
 }

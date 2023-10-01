@@ -17,4 +17,10 @@ describe('Functions', () => {
   it('should format the date to database format', () => {
     expect(utils.formatDateForDatabase('02/10/2021')).toEqual('2021-10-02T00:00:00');
   });
+
+  it('should format to Brazilian date', () => {
+    expect(utils.formatToBrazilianDate('')).toEqual('');
+    expect(utils.formatToBrazilianDate('2020-10-22T23:11:000')).toEqual('22/10/2020');
+    expect(utils.formatToBrazilianDate('10/02/2021')).toEqual('10/02/2021');
+  });
 });

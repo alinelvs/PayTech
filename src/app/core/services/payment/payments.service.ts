@@ -14,7 +14,11 @@ export class PaymentService {
   }
 
   createPayment(body: IPayment) {
-    return this.apiService.post(`/payment`, body)
+    return this.apiService.post<IPayment>(`/payment`, body)
+  }
+
+  editPayment(body: IPayment) {
+    return this.apiService.put<IPayment>(`/payment/${body.id}`, body)
   }
 
   deletePayment(paymentId: number): Observable<{}> {

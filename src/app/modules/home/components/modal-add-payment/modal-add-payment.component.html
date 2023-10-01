@@ -7,7 +7,8 @@
   <h1
     class="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4"
   >
-    Adicionar Pagamento
+    {{ currentEditPayment ? 'Editar Pagamento' : 'Adicionar Pagamento' }}
+
   </h1>
 
   <form
@@ -93,7 +94,6 @@
         id="date"
         formControlName="date"
         mask="d0/M0/0000"
-        decimalMarker=","
         [dropSpecialCharacters]="false"
         class="mt-2 text-gray-600 focus:outline-none focus:border focus:border-green-400 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
         placeholder="dd/mm/aaaa"

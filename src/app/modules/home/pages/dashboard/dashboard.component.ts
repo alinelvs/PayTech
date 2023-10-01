@@ -74,6 +74,22 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
       });
   }
 
+  public onEdit(payment: IPayment) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.data = {
+      currentEditPayment: payment
+    }
+
+    const dialog = this.dialog.open(ModalAddPaymentComponent, dialogConfig);
+    dialog
+      .afterClosed()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe({
+        next: () => this._getPayments()
+      });
+  }
+
   private _getPayments() {
     this.paymentService
       .getPayments()
