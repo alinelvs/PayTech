@@ -61,6 +61,7 @@ export class ModalAddPaymentComponent implements OnInit {
 
   private _addPayment(data: IPayment) {
     data.date = formatDateForDatabase(data.date);
+    data.image = `https://robohash.org/${data.name}.png?size=150x150&set=set4`;
 
     this.paymentService
       .createPayment(data)
