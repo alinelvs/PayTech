@@ -1,0 +1,9 @@
+<button
+  type="button"
+  (click)="onClick()"
+  [disabled]="isDisabled"
+  class="inline-block w-full py-4 px-8 leading-none text-white transition duration-150 ease-in-out   text-sm rounded shadow"
+  [ngClass]="isDisabled ? 'bg-gray-400 focus:ring-gray-400 transition duration-150 ease-in-out hover:bg-gray-400' : 'bg-green-400 hover:bg-green-600 focus:ring-green-700'"
+>
+  <span>{{ text }}</span>
+</button>
