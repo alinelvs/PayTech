@@ -9,6 +9,7 @@ import {
 import { Router } from '@angular/router';
 import { PagesRoutes } from '@core/constants/page-routes.constant';
 import { Subject, takeUntil } from 'rxjs';
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'paytech-login',
@@ -23,7 +24,8 @@ export class LoginComponent {
   constructor(
     private authService: AuthService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -50,11 +52,12 @@ export class LoginComponent {
         next: () => {
           this.router.navigate([PagesRoutes.HOME]);
         },
-        error: (error) => {
-          console.log(error);
-        },
-        complete: () => {
+        error: (error: Error) => {
           this.form.reset();
+          this._snackBar.open(error.message, 'fechar', {
+            duration: 3000
+          });
+
         },
       });
   }

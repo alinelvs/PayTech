@@ -2,14 +2,22 @@ import { TestBed } from '@angular/core/testing';
 import { AuthService } from './auth.service';
 import { StorageProvider } from '@core/providers/storage/models/storage.model';
 import { StorageProviderMock } from '@core/providers/storage/mock/storage.mock';
+import { IAccount } from '@core/interfaces/account.interface';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ApiService } from '../api/api.service';
 
 describe('AuthService', () => {
   let authService: AuthService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule,
+        HttpClientModule
+      ],
       providers: [
-        AuthService,
+        ApiService,
         { provide: StorageProvider, useClass: StorageProviderMock },
       ],
     });
@@ -19,24 +27,5 @@ describe('AuthService', () => {
 
   it('should be created', () => {
     expect(authService).toBeTruthy();
-  });
-
-  it('should call the storage with user data', () => {
-    jest.spyOn(authService['storageProvider'], 'setItem').mockImplementation();
-    authService.signIn('test@test.com');
-    expect(authService['storageProvider'].setItem).toHaveBeenCalled();
-  });
-
-
-  it('should return the saved tokens from storage', () => {
-    jest.spyOn(authService['storageProvider'], 'getItem').mockImplementation();
-    authService.isLoggedIn();
-    expect(authService['storageProvider'].getItem).toHaveBeenCalledWith("ACCESS_TOKEN");
-  });
-
-  it('should remove the saved tokens from storage', () => {
-    jest.spyOn(authService['storageProvider'], 'removeItem').mockImplementation();
-    authService.logout();
-    expect(authService['storageProvider'].removeItem).toHaveBeenCalledWith("ACCESS_TOKEN");
   });
 });

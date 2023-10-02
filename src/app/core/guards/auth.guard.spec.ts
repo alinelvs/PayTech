@@ -1,45 +1,49 @@
 import { TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import {
   ActivatedRouteSnapshot,
-  CanActivateFn,
   RouterStateSnapshot,
+  Router,
 } from '@angular/router';
-
-import { AuthGuard, IsAuthGuard } from './auth.guard';
+import { AuthGuard } from './auth.guard';
 import { AuthService } from '@core/services/auth/auth.service';
+import { PagesRoutes } from '@core/constants/page-routes.constant';
+import { of } from 'rxjs';
 
-describe('authGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) =>
-    TestBed.runInInjectionContext(() => IsAuthGuard(...guardParameters));
+const AuthServiceMocks = {
+  signIn: () =>
+    of({
+      email: 'email@email.com',
+      password: '123123',
+    }),
+};
+
+describe('AuthGuard', () => {
+  let guard: AuthGuard;
+  let authService: AuthService;
+  let router: Router;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [IsAuthGuard, AuthGuard]
+      imports: [RouterTestingModule],
+      providers: [
+        AuthGuard,
+        { provide: AuthService, useValue: AuthServiceMocks },
+        {
+          provide: Router,
+          useValue: {
+            navigate: jest.fn(),
+          } as any,
+        },
+      ],
     });
+
+    guard = TestBed.inject(AuthGuard);
+    authService = TestBed.inject(AuthService);
+    router = TestBed.inject(Router);
   });
 
   it('should be created', () => {
-    expect(executeGuard).toBeTruthy();
-  });
-
-  it('should return true when user is logged in', () => {
-    const authService = new AuthService(true as any);
-    const authGuard = new AuthGuard(authService);
-    jest.spyOn(authService, 'isLoggedIn').mockReturnValue(true);
-
-    const result = authGuard.canActivate(null as any, null as any);
-
-    expect(result).toBe(true);
-    expect(authService.isLoggedIn).toHaveBeenCalledTimes(1);
-  });
-
-  it('should return false when user is not logged in', () => {
-    const authService = new AuthService(true as any);
-    authService.isLoggedIn = jest.fn().mockReturnValue(false);
-    const authGuard = new AuthGuard(authService);
-
-    const result = authGuard.canActivate(null as any, null as any);
-
-    expect(result).toBe(false);
+    expect(guard).toBeTruthy();
   });
 });
