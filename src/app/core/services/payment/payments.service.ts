@@ -13,11 +13,11 @@ export class PaymentService {
     return this.apiService.get<IPayment[]>(`/payment`);
   }
 
-  createPayment(body: IPayment) {
+  createPayment(body: IPayment): Observable<IPayment> {
     return this.apiService.post<IPayment>(`/payment`, body)
   }
 
-  editPayment(body: IPayment) {
+  editPayment(body: IPayment): Observable<IPayment> {
     return this.apiService.put<IPayment>(`/payment/${body.id}`, body)
   }
 

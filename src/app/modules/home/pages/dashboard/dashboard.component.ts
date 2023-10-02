@@ -27,12 +27,12 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
     'delete',
   ];
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
+  private _unsubscribe$: Subject<void> = new Subject<void>();
 
   constructor(
-    private _liveAnnouncer: LiveAnnouncer,
+    private dialog: MatDialog,
     private paymentService: PaymentService,
-    private dialog: MatDialog
+    private _liveAnnouncer: LiveAnnouncer,
   ) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -43,8 +43,8 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
+    this._unsubscribe$.next();
+    this._unsubscribe$.complete();
   }
 
   public announceSortChange(sortState: Sort) {
@@ -58,7 +58,7 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
   public onDelete(id: number): void {
     this.paymentService
       .deletePayment(id)
-      .pipe(takeUntil(this.unsubscribe$))
+      .pipe(takeUntil(this._unsubscribe$))
       .subscribe({
         next: () => this._getPayments(),
       });
@@ -68,7 +68,7 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
     const dialog = this.dialog.open(ModalAddPaymentComponent);
     dialog
       .afterClosed()
-      .pipe(takeUntil(this.unsubscribe$))
+      .pipe(takeUntil(this._unsubscribe$))
       .subscribe({
         next: () => this._getPayments()
       });
@@ -84,7 +84,7 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
     const dialog = this.dialog.open(ModalAddPaymentComponent, dialogConfig);
     dialog
       .afterClosed()
-      .pipe(takeUntil(this.unsubscribe$))
+      .pipe(takeUntil(this._unsubscribe$))
       .subscribe({
         next: () => this._getPayments()
       });
@@ -93,7 +93,7 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
   private _getPayments() {
     this.paymentService
       .getPayments()
-      .pipe(takeUntil(this.unsubscribe$))
+      .pipe(takeUntil(this._unsubscribe$))
       .subscribe({
         next: (res) => {
           if (res) {

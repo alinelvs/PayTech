@@ -8,15 +8,18 @@
   <p class="mt-6 text-2xl font-semibold text-green-400">Entrar</p>
   <p class="mt-2 text-sm text-gray-600 max-w">
     Novo por aqui?
-    <a class="text-green-400 cursor-pointer hover:font-medium">Crie sua conta agora</a>
+    <a class="text-green-400 cursor-pointer hover:font-medium"
+      >Crie sua conta agora</a
+    >
   </p>
 </div>
 <div class="mt-6">
-  <form>
+  <form [formGroup]="form" #formTemplate="ngForm">
     <div class="mb-4">
       <input
         type="text"
         placeholder="E-mail"
+        formControlName="email"
         class="appearance-none block w-full py-3 px-4 leading-tight text-gray-700 bg-gray-50 focus:bg-white border border-gray-200 focus:border-gray-500 rounded focus:outline-none"
       />
     </div>
@@ -25,17 +28,24 @@
       <input
         type="password"
         placeholder="Senha"
+        formControlName="password"
         class="appearance-none block w-full py-3 px-4 leading-tight text-gray-700 bg-gray-50 focus:bg-white border border-gray-200 focus:border-gray-500 rounded focus:outline-none"
       />
     </div>
 
     <div class="mb-4">
-      <paytech-button  text="Entrar"></paytech-button>
+      <paytech-button
+        text="Entrar"
+        (buttonClick)="onSubmit(formTemplate)"
+        [isDisabled]="!form.valid"
+      ></paytech-button>
     </div>
 
     <div class="mb-4">
       <p>
-        <a class="text-green-400 cursor-pointer hover:font-medium">Esqueceu sua senha?</a>
+        <a class="text-green-400 cursor-pointer hover:font-medium"
+          >Esqueceu sua senha?</a
+        >
       </p>
     </div>
   </form>

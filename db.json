@@ -1,5 +1,7 @@
 {
-  "profile": { "name": "api" },
+  "profile": {
+    "name": "api"
+  },
   "payment": [
     {
       "id": 1,
@@ -200,10 +202,26 @@
       "date": "2023-04-07T08:23:00",
       "isPayed": true,
       "image": "https://robohash.org/Hudson Livingston.png?size=150x150&set=set4"
+    },
+    {
+      "id": 21,
+      "image": "https://robohash.org/Kaua.png?size=150x150&set=set4",
+      "name": "Kaua",
+      "username": "kauagvs",
+      "title": "Front",
+      "value": 12000,
+      "date": "1996-07-04T00:00:00",
+      "isPayed": true
     }
   ],
-  "user": {
-    "email": "usuario@gmail.com",
-    "password": "usuario"
-  }
+  "account": [
+    {
+      "email": "usuario@gmail.com",
+      "password": "usuario"
+    },
+    {
+      "email": "aline@gmail.com",
+      "password": "123123"
+    }
+  ]
 }

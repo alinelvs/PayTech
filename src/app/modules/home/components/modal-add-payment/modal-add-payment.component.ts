@@ -23,7 +23,7 @@ export class ModalAddPaymentComponent implements OnInit {
   public form!: FormGroup;
   public currentEditPayment!: IPayment;
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
+  private _unsubscribe$: Subject<void> = new Subject<void>();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -42,8 +42,8 @@ export class ModalAddPaymentComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
+    this._unsubscribe$.next();
+    this._unsubscribe$.complete();
   }
 
   public onClose() {
@@ -65,7 +65,7 @@ export class ModalAddPaymentComponent implements OnInit {
 
     this.paymentService
       .createPayment(data)
-      .pipe(takeUntil(this.unsubscribe$))
+      .pipe(takeUntil(this._unsubscribe$))
       .subscribe({
         complete: () => {
           this.form.reset();
@@ -78,7 +78,7 @@ export class ModalAddPaymentComponent implements OnInit {
     data.date = formatDateForDatabase(data.date);
     this.paymentService
       .editPayment(data)
-      .pipe(takeUntil(this.unsubscribe$))
+      .pipe(takeUntil(this._unsubscribe$))
       .subscribe({
         complete: () => {
           this.form.reset();
