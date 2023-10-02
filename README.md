@@ -38,6 +38,13 @@ Para utilizar o projeto, siga os passos abaixo:
 2. Inicie a API: `npm run api`
 3. Acesse o projeto no seu navegador: `http://localhost:4200`
 
+### Acesso
+
+Login da plataforma<br />
+E-mail:`usuario@gmail.com`
+Senha:`usuario`
+
+
 ## Testes Automatizados
 
 O projeto inclui testes automatizados para garantir a qualidade do código. Você pode executar os testes utilizando o comando:
