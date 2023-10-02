@@ -3,4 +3,5 @@ export interface IPageMenu {
   url?: string;
   subMenus?: Array<IPageMenu>;
   isActive?: boolean;
+  onClick?: boolean;
 }

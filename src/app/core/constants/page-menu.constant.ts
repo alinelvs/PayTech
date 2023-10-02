@@ -18,6 +18,7 @@ export const pageMenu: IPageMenu[] = [
       {
         title: 'Logout',
         url: PagesRoutes.LOGIN,
+        onClick: true
       },
     ],
   },

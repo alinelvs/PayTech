@@ -27,7 +27,7 @@
         >
           <ng-container *ngFor="let subMenu of menu.subMenus">
             <li>
-              <a [routerLink]="subMenu.url" routerLinkActive="active">
+              <a [routerLink]="subMenu.url" routerLinkActive="active" (click)="executeSubMenuAction(subMenu)">
                 <span class="nav-item">
                   <span class="subMenus__title">
                     {{ subMenu.title }}

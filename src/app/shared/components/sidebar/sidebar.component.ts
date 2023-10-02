@@ -1,3 +1,4 @@
+import { AuthService } from '@core/services/auth/auth.service';
 import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { IPageMenu } from '@core/interfaces/page-menu.interface';
@@ -11,11 +12,9 @@ import { pageMenu } from '@core/constants/page-menu.constant';
 export class SidebarComponent {
   public menus = pageMenu;
   public currentUrl: string = '';
+  public selectedMenu: IPageMenu | null = null;
 
-
-  selectedMenu: IPageMenu | null = null;
-
-  constructor(public router: Router) {
+  constructor(private authService: AuthService, public router: Router) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.selectMenuByUrl(event.url);
@@ -25,7 +24,7 @@ export class SidebarComponent {
     this.selectMenuByUrl(this.router.url);
   }
 
-  closeOtherMenus(selectedMenu: IPageMenu | null): void {
+  public closeOtherMenus(selectedMenu: IPageMenu | null): void {
     this.menus.forEach((menu) => {
       if (menu !== selectedMenu) {
         menu.isActive = false;
@@ -33,14 +32,20 @@ export class SidebarComponent {
     });
   }
 
-  toggleMenu(menu: IPageMenu | null): void {
+  public executeSubMenuAction(subMenu: IPageMenu): void {
+    if (subMenu.onClick) {
+      this.authService.logout();
+    }
+  }
+
+  public toggleMenu(menu: IPageMenu | null): void {
     if (menu?.subMenus && menu?.subMenus.length > 0) {
       menu.isActive = !menu.isActive;
       this.closeOtherMenus(menu);
     }
   }
 
-  selectMenuByUrl(url: string): void {
+  public selectMenuByUrl(url: string): void {
     let selected: IPageMenu | null = null;
     const urlWithoutSlash = url.replace('/', '');
     this.menus.forEach((menu) => {
@@ -48,6 +53,8 @@ export class SidebarComponent {
         if (subMenu.url === urlWithoutSlash) {
           menu.isActive = true;
           selected = menu;
+        } else {
+          menu.isActive = false;
         }
       });
     });
