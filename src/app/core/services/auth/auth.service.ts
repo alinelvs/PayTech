@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { StorageProvider } from '@core/providers/storage/models/storage.model';
-import { ApiService } from '../api/api.service';
 import { map, Observable } from 'rxjs';
 import { ErrorMessages } from '@core/constants/error-messages.constant';
 import { IAccount } from '@core/interfaces/account.interface';
+import { ApiService } from '@core/services/api/api.service';
 @Injectable({
   providedIn: 'root',
 })

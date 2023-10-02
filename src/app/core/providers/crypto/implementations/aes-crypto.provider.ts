@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import * as CryptoJS from 'crypto-js'
 
 import { CryptoProvider } from '../models/crypto.model';
-import { environment } from '../../../../../environments/environment';
+import { environment } from '@environments/environment';
 
 @Injectable()
 export class AESCryptoProvider extends CryptoProvider {

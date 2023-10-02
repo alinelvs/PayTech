@@ -1,4 +1,4 @@
-import { AuthService } from './../../../../core/services/auth/auth.service';
+import { AuthService } from '@core/services/auth/auth.service';
 import { Component } from '@angular/core';
 import {
   FormBuilder,
